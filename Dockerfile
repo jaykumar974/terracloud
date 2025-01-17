@@ -1,5 +1,5 @@
 # Utilisez une image Docker officielle pour PHP 7.4 avec Apache
-FROM php:7.4-apache
+FROM php:8.2.8-apache
 
 # Installez les extensions PHP nécessaires
 RUN docker-php-ext-install pdo_mysql
@@ -15,8 +15,8 @@ COPY . /var/www/html/
 # Installez les dépendances de l'application
 RUN composer install
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
-RUN chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
+RUN chown -R www-data:www-data /var/www/html/vendor /var/www/html/storage /var/www/html/bootstrap /var/www/html/public /var/www/html/app /var/www/html/config /var/www/html/routes /var/www/html/resources
+RUN chmod -R 755 /var/www/html/vendor /var/www/html/storage /var/www/html/bootstrap /var/www/html/public /var/www/html/app /var/www/html/config /var/www/html/routes /var/www/html/resources
 
 # Modifiez la configuration d'Apache pour pointer vers le répertoire public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
