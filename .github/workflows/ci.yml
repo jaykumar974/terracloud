@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run SSH commands
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USERNAME}}
+        key: ${{ secrets.SSHPRIVATEKEY }}
+        script: |
+          cd /terracloud
+          docker compose down
+          git fetch
+          git checkout ${{ github.sha }}
+          docker compose up  --build -d
+          sleep 30
+          docker exec app php artisan migrate
+          docker exec app php artisan db:seed
