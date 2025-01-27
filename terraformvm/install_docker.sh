@@ -37,7 +37,8 @@ docker-compose --version
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 # Clone le dépôt Git
-git clone https://github.com/jaykumar974/terracloud.git 
+git clone https://github.com/jaykumar974/terracloud.git
+git config --global --add safe.directory /terracloud # Important pour pouvoir checkout par la suite
 cd /terracloud
 
 # Construit les images Docker
