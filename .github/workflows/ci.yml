@@ -16,8 +16,8 @@ jobs:
     - name: Run SSH commands
       uses: appleboy/ssh-action@v0.1.5
       with:
-        host: ${{ secrets.TERRACLOUD }}
-        username: ${{ secrets.USERNAME}}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSHPRIVATEKEY }}
         script: |
           cd /terracloud
