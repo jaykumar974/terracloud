@@ -22,7 +22,7 @@ jobs:
         script: |
           cd /terracloud
           docker compose down
-          git fetch --all
+          git fetch
           git checkout ${{ github.sha }}
           docker compose up  --build -d
           sleep 30
